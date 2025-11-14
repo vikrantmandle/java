@@ -1,0 +1,41 @@
+package com.app.java.streams.prep;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.app.basic.streams.data.Department;
+
+public class Day7 {
+	
+	static void problem1() {
+		List<Department>departmentData=Department.populateDepartments();
+		
+	Map<Object, Map<Object, List<Department>>>employeeData=	departmentData.stream().collect(Collectors.groupingBy(n->n.getName(),
+				Collectors.groupingBy(emp->emp.getEmployees().stream().collect(Collectors.groupingBy(data->{
+					if (data.getSalary() < 50000)
+                        return "LOW";
+                    else if (data.getSalary() < 100000)
+                        return "MID";
+                    else
+                        return "HIGH";
+				})))
+				));
+	}
+
+	public static void main(String[] args) {
+		
+		problem1();
+	}
+
+}
+
+
+/*
+Problem 1 — Multi-Level Grouping: Department → Salary Range → Names
+	Salary ranges:
+	LOW: < 50,000
+	MID: 50,000 – 100,000
+	HIGH: > 100,000
+
+*/

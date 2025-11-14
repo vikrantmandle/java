@@ -1,0 +1,29 @@
+package com.app.java.streams.prep;
+
+import java.util.List;
+
+import com.app.basic.streams.data.Department;
+
+public class Day7 {
+	
+	static void problem1() {
+		List<Department>departmentData=Department.populateDepartments();
+		System.out.println(departmentData);
+	}
+
+	public static void main(String[] args) {
+		
+		problem1();
+	}
+
+}
+
+
+/*
+Problem 1 — Multi-Level Grouping: Department → Salary Range → Names
+	Salary ranges:
+	LOW: < 50,000
+	MID: 50,000 – 100,000
+	HIGH: > 100,000
+
+*/

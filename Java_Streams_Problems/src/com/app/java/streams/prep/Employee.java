@@ -35,7 +35,7 @@ public class Employee {
 				new Employee("Julie","HR",450000),new Employee("William","Cyber security",50000),
 				new Employee("Geralt","IT",190000),new Employee("James","IT",67000),
 				new Employee("Daniel","Cyber security",8000),new Employee("Peter","IT",1000),
-				new Employee("Cyril","Cyber security",80000),new Employee("Adam","HR",10000));
+				new Employee("Cyril","Cyber security",80000),new Employee("Adam","HR",200000));
 	 
 	 return employee;
 	 }

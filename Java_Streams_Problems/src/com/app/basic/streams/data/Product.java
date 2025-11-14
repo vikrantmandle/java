@@ -1,0 +1,60 @@
+package com.app.basic.streams.data;
+
+import java.util.List;
+
+
+public class Product {
+	String name; String category; double price;
+
+	public Product( String category, String name,double price) {
+		super();
+		this.name = name;
+		this.category = category;
+		this.price = price;
+	}
+
+	public static List<Product> populateProducts(){
+		List<Product> products = List.of(new Product("Electronics","Laptop", 85000.0),
+				new  Product("Electronics","Smartphone", 50000.0),
+				new  Product("Electronics","Earbuds", 5000.0),
+				new  Product("Grocery","Rice ", 15000.0),
+			    new  Product("Electronics","Fruits", 150.0),
+			    new  Product("Grocery","Lentils", 500.0),
+				new  Product("Grocery","Cereals", 1500.0),
+			    new  Product("Grocery","Wheat", 150.0),
+			    new  Product("Electronics","Mouse", 3000.0));
+		
+		return products;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "name=" + name + " price=" + price;
+	}
+	
+	
+
+}
