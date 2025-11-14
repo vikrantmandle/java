@@ -1,0 +1,90 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.app.java.streams.prep.Employee;
+import com.app.java.streams.prep.Transaction;
+
+public class Day4 {
+
+	//Problem 1 — Nested Grouping: Employees by Department and Salary Range
+	//Low <50000
+	//Mid <100000
+	//High else part
+	static void problem1() {
+		List<Employee>employeeData=Employee.populateEmployee();
+		
+		Map<String, Map<String,List<Employee>>>empdata=  employeeData.stream().collect(Collectors.groupingBy(Employee::getDepartment,
+				Collectors.groupingBy(emp->{if(emp.getSalary()<50000)
+					 return "LOW";
+                else if (emp.getSalary() < 100000)
+                    return "MID";
+                else
+                    return "HIGH";						
+				})
+				));
+		empdata.forEach((dept, rangeMap) -> {
+		    System.out.println("\nDepartment: " + dept);
+		    rangeMap.forEach((range, emps) -> {
+		        System.out.println("  " + range + " => " + emps);
+		    });
+		});
+	}
+	//Problem 2 Find Department with max total Salary
+	static void problem2() {
+		List<Employee> employeeData=Employee.populateEmployee();
+		
+		Map<String,Long>salaryTotal=employeeData.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.summingLong(Employee::getSalary)));
+	
+	Optional<Map.Entry<String,Long>>highestDepartment=salaryTotal.entrySet().stream().max(Map.Entry.comparingByValue());
+	
+	highestDepartment.ifPresent(entry->{
+	    System.out.println("Department with highest salary: " 
+		        + entry.getKey() + " (" + entry.getValue() + ")");
+	});
+	}
+	//Problem 3 Join All Names Alphabetically
+	static void problem3() {
+		List<String>names=Arrays.asList("John", "Ben", "Adam", "Clark");
+		String combinedNames=names.stream().sorted().collect(Collectors.joining(", ", "[", "]"));
+		System.out.println("Combined Names=>"+combinedNames);
+	}
+	
+	//Problem 4 — Average Budget of Successful Transactions by Category
+	static void problem4(){
+		List<Transaction>transactionData=Transaction.populateDefaultTransactions();
+		
+	Map<String,Double>avgTransaction=	transactionData.stream().filter(transaction->transaction.getStatus().equals("SUCCESS")).
+		collect(Collectors.groupingBy(Transaction::getCategory,Collectors.averagingDouble(Transaction::getBudget)));
+	
+	avgTransaction.forEach((a,b)->System.out.println("Department = "+a+" Average success amount="+b));
+	
+	}
+	
+	//	Problem 5 — Custom Collector: Count and Sum of Even Numbers
+	static void problem5() {
+		List<Integer> numbers=Arrays.asList(1,6,4,56,23,44,89,21,43,54);
+		
+	Map<String,Number>evenNumberData=	numbers.stream().filter(n->n%2==0).collect(Collectors.teeing(Collectors.counting(), Collectors.summingInt(Integer::intValue), (count,sum)->Map.of("count",count,"sum",sum)));
+	
+	System.out.println("Count = " + evenNumberData.get("count"));
+	System.out.println("Sum = " + evenNumberData.get("sum"));
+	}
+	public static void main(String[] args) {
+		problem1();
+		System.out.println("------------------------");
+		problem2();
+		System.out.println("------------------------");
+		problem3();
+		System.out.println("------------------------");
+		problem4();
+		System.out.println("------------------------");
+		problem5();
+	}
+
+}

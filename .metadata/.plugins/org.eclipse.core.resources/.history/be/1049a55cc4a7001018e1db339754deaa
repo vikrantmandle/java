@@ -1,0 +1,14 @@
+package com.app.thread.practice;
+
+class Mythread extends Thread{
+	
+}
+
+public class ThreadFirstProgramm {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

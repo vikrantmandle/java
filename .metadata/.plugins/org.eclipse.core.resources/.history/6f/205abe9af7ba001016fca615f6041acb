@@ -1,0 +1,67 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.app.java.streams.prep.Employee;
+
+
+public class Day2 {
+	
+	//Problem 1 Find Users using gmail 
+	static void problem1() {
+		List<User> users = List.of(
+			    new User("Alice", List.of("alice@gmail.com", "alice@work.com")),
+			    new User("Bob", List.of("bob@yahoo.com")),
+			    new User("Charlie", List.of("charlie@gmail.com", "c@company.com")),
+			    new User("Mathew", List.of("mathew-wade@yahoo.com","mathew-new@gmail.com"))
+			);
+		
+		List<String> sortedEmails=users.stream().flatMap(n->n.getEmails().stream()
+				.filter(mail->mail.endsWith("@gmail.com"))).collect(Collectors.toList());
+		
+		//List of specific emails
+		sortedEmails.forEach(System.out::println);
+		
+		//List of users using specific emails
+		List<User> specificMailUser = users.stream()
+			    .filter(u -> u.getEmails().stream().anyMatch(mail -> mail.endsWith("@gmail.com")))
+			    .collect(Collectors.toList());
+	}
+
+	static void problem2() {
+		   List<Employee> employee = Arrays.asList(new Employee("John","HR",100000),new Employee("Ben","IT",300000),
+					new Employee("Julie","HR",450000),new Employee("William","Cyber security",50000),
+					new Employee("Geralt","IT",190000),new Employee("James","IT",67000),
+					new Employee("Cyril","Cyber security",80000),new Employee("Adam","HR",10000));
+		   
+		Map<String,Optional<Employee>> sortedEmployees=   employee.stream().collect(Collectors.groupingBy(Employee::getDepartment,Collectors.maxBy(Comparator.comparingLong(Employee::getSalary))));
+		//sortedEmployees.forEach((a,b)->System.out.println("{"+a+" "+b.orElse(null)));
+	
+	    //finding second highest earning employee in department
+	Map<String,Employee> highestEmployee=	employee.stream().collect(
+				Collectors.groupingBy
+				(Employee::getDepartment,Collectors.collectingAndThen(Collectors.toList(), 
+						list->list.stream().sorted(Comparator.comparingLong(Employee::getSalary).reversed())
+						.skip(1)
+						.findFirst()
+						.orElse(null)
+						)));
+	System.out.println("Second highest employee");
+	highestEmployee.forEach((a,b)->System.out.println("{"+a+" "+b));
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("------------------------");
+		problem1();
+		System.out.println("------------------------");
+		problem2();
+		System.out.println("------------------------");
+		
+	}
+
+}

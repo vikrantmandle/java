@@ -1,0 +1,45 @@
+package com.app.basic.streams.revision;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.app.basic.streams.data.Department;
+import com.app.java.streams.prep.Employee;
+
+public class Day6 {
+
+	//Problem 2 — Find Top N Employees by Salary per Department
+	static void problem2(int n) {
+	List<Employee>employee=Employee.populateEmployee();
+	Map<String,Optional<Employee>> specificHighest=	employee.stream().collect(Collectors.groupingBy(Employee::getDepartment,
+				Collectors.collectingAndThen(Collectors.toList(), list->list.stream().sorted(Comparator.comparingLong(Employee::getSalary).reversed()).skip(n).findFirst())));
+	specificHighest.forEach((dep,data)->System.out.println("Department= "+dep+"  "+data.orElse(null)));
+	}
+	
+	//Problem 2.2 — Find Top N Employees by Salary per Department
+	static void problem2_2(){
+
+		List<Department> departments = Department.populateDepartments();
+		System.out.println("Departments=> "+departments);
+	
+	}
+	
+	
+	//Problem 3 — Convert List to Custom String Format
+	static void problem3() {
+		List<String> names = List.of("John", "Ben", "Adam", "Clark");
+		String customNameFormat=names.stream().
+				collect(Collectors.joining(" | ", "Employee Names: ", ""));
+		System.out.println("customNameFormat=> "+customNameFormat);
+	}
+	
+	public static void main(String[] args) {
+		problem2(2);
+		System.out.println("------------------");
+		problem3();
+	}
+
+}

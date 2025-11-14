@@ -1,0 +1,23 @@
+package com.app.basic.streams.revision;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Day6 {
+
+	//Problem 3 — Convert List to Custom String Format
+	static void problem3() {
+		List<String> names = List.of("John", "Ben", "Adam", "Clark");
+		
+		String customNameFormat=names.stream().collect(Collectors.joining("| ",", ","|"));
+		
+		System.out.println("customNameFormat=> "+customNameFormat);
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		problem3();
+	}
+
+}

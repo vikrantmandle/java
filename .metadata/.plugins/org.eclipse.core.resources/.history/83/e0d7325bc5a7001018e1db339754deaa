@@ -1,0 +1,21 @@
+package com.app.thread.practice;
+
+class Mythread extends Thread{
+	// default parameterless constructor for the MyThread class is provided by JVM
+	
+	public void run() {
+		System.out.println("Thread 1 started from My thread class");
+	}
+	
+}
+
+public class ThreadFirstProgramm {
+
+	public static void main(String[] args) {
+		
+		// way 1 of execution
+		Mythread myThread = new Mythread();
+		myThread.start();
+	}
+
+}

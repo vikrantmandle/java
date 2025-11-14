@@ -1,0 +1,21 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Day5 {
+	
+	//Group names alphabetically using Stream API
+	static void problem1() {
+		List<String> names=Arrays.asList("Alice", "Bob", "Arjun", "Charlie", "Ankit", "David");
+
+		List<String> sortedNames=names.stream().sorted().toList();
+
+		sortedNames.forEach(System.out::println);
+	}
+
+	public static void main(String[] args) {
+		problem1();
+	}
+
+}

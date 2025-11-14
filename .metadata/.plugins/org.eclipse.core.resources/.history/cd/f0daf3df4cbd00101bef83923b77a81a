@@ -1,0 +1,47 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.app.java.streams.prep.Employee;
+
+public class Day4 {
+
+	//Problem 1 — Nested Grouping: Employees by Department and Salary Range
+	//Low <50000
+	//Mid <100000
+	//High else part
+	static void problem1() {
+		List<Employee>employeeData=Employee.populateEmployee();
+		
+		Map<String, Map<String,List<Employee>>>empdata=  employeeData.stream().collect(Collectors.groupingBy(Employee::getDepartment,
+				Collectors.groupingBy(emp->{if(emp.getSalary()<50000)
+					 return "LOW";
+                else if (emp.getSalary() < 100000)
+                    return "MID";
+                else
+                    return "HIGH";						
+				})
+				));
+		empdata.forEach((dept, rangeMap) -> {
+		    System.out.println("\nDepartment: " + dept);
+		    rangeMap.forEach((range, emps) -> {
+		        System.out.println("  " + range + " => " + emps);
+		    });
+		});
+	}
+	//Problem 3 Join All Names Alphabetically
+	static void problem3() {
+		List<String>names=Arrays.asList("John", "Ben", "Adam", "Clark");
+		String nam=names.stream().sorted().collect(Collectors.joining(", ", "[", "]"));
+	}
+	public static void main(String[] args) {
+		problem1();
+		System.out.println("------------------------");
+		
+
+	}
+
+}

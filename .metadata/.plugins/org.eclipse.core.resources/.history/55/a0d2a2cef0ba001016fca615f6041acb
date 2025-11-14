@@ -1,0 +1,26 @@
+package com.app.basic.streams.revision;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+public class Day2 {
+	
+	//Problem 1 Find Users using gmail 
+	static void problem1() {
+		List<User> users = List.of(
+			    new User("Alice", List.of("alice@gmail.com", "alice@work.com")),
+			    new User("Bob", List.of("bob@yahoo.com")),
+			    new User("Charlie", List.of("charlie@gmail.com", "c@company.com")),
+			    new User("Mathew", List.of("mathew-wade@yahoo.com","mathew-new@gmail.com"))
+			);
+		
+		
+	}
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

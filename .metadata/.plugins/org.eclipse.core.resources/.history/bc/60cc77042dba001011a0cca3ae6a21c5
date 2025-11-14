@@ -1,0 +1,46 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class Day1 {
+	
+	static void problem1() {
+		List<String>names= Arrays.asList("Virat", "Rohit", "Rahul", "Rishabh", "Bumrah", "Ishan");
+		
+		List<String>sortedNames=names.stream().filter(n->n.startsWith("R")).sorted().collect(Collectors.toList());
+	
+		sortedNames.forEach(System.out::println);
+	}
+	
+	static void problem2() {
+		List<Integer> numbers= Arrays.asList(2, 3, 4, 5);
+		int squaredNums=numbers.stream().map(n->n*n).reduce(0,(a,b)->a+b);
+		
+		System.out.println("squaredNums=>"+squaredNums);
+	}
+	
+	static void problem3() {
+		List<String> uniqueFruits= Arrays.asList("apple", "banana", "apple", "orange", "banana", "grape");
+		Set<String>fruits= new HashSet<>(uniqueFruits);
+		
+		Long countOfUniqueFruits=uniqueFruits.stream().distinct().count();
+		
+		System.out.println("Count of unique fruits=>"+countOfUniqueFruits);
+		
+		fruits.forEach(System.out::println);
+	}
+	
+	static void problem4() {
+		
+	}
+	
+	
+	public static void main(String [] args) {
+		
+	}
+
+}

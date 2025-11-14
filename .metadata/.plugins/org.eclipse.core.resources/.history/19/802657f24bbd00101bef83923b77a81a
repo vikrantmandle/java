@@ -1,0 +1,14 @@
+package com.app.basic.streams.revision;
+
+public class Day4 {
+
+	static void problem1() {
+		
+	}
+	
+	public static void main(String[] args) {
+		
+
+	}
+
+}

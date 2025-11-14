@@ -1,0 +1,10 @@
+package com.app.collections;
+
+public class FailFast_FailSafe {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

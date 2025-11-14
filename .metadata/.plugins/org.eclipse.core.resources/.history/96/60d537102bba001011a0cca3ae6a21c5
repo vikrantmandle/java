@@ -1,0 +1,19 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Day1 {
+	
+	static void problem1() {
+		List<String>names= Arrays.asList("Virat", "Rohit", "Rahul", "Rishabh", "Bumrah", "Ishan");
+		
+		List<String>sortedNames=names.stream().filter(n->n.startsWith("R")).sorted().collect(Collectors.toList());
+	}
+	
+	public static void main(String [] args) {
+		
+	}
+
+}
