@@ -85,8 +85,6 @@ public class Day6 {
 		problem3();
 		System.out.println("-------------------");
 		problem4();
-		System.out.println("-------------------");
-		problem5();
 	}
 
 }

@@ -3,7 +3,6 @@ package com.app.basic.streams.revision;
 import java.util.AbstractMap;
 import java.util.Comparator;
 import java.util.List;
-import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,9 +40,6 @@ public class Day6 {
 	
 		Map<String,Object> nth_salary_of_department=departments.stream().collect(Collectors.toMap(Department::getName, dept->dept.getEmployees().stream()
 				.sorted(Comparator.comparingLong(Employee::getSalary).reversed()).skip(1).findFirst()));
-	
-		nth_salary_of_department.forEach((dept, list) -> {
-		    System.out.println(dept + " → " + list);});
 	}
 	
 	
@@ -55,38 +51,12 @@ public class Day6 {
 		System.out.println("customNameFormat=> "+customNameFormat);
 	}
 	
-	//Problem 4 — Partition Employees by Salary Range
-	static void problem4() {
-		List<Employee> employee =Department.populateDepartments().stream()
-				.flatMap(dept->dept.getEmployees().stream())
-				.collect(Collectors.toList());
-		Map<Boolean,List<Employee>>partioendEmployee= employee.stream().collect(Collectors.partitioningBy(n->n.getSalary()>100000));
-	
-	partioendEmployee.forEach((isHigh,emp)->System.out.println((isHigh ? "High Earners (>100k)" : "Others") + " → " + emp));
-	}
-	
-	//Problem 5 — Department-wise Highest & Lowest Salaries
-	static void problem5() {
-	Map<String,LongSummaryStatistics> departmentSalary=	 Department.populateDepartments().stream().collect(Collectors.toMap(Department::getName, dep->dep.getEmployees().stream()
-				.collect(Collectors.summarizingLong(Employee::getSalary))
-				));
-	
-	departmentSalary.forEach((dept, stats) ->
-    System.out.println(dept + " → Min: " + stats.getMin() + ", Max: " + stats.getMax()));;
-	}
-	
 	public static void main(String[] args) {
-		problem1();
-		System.out.println("------------------");
 		problem2(2);
 		System.out.println("------------------");
 		problem2_2();
 		System.out.println("------------------");
 		problem3();
-		System.out.println("-------------------");
-		problem4();
-		System.out.println("-------------------");
-		problem5();
 	}
 
 }

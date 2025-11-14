@@ -70,7 +70,6 @@ public class Day6 {
 	Map<String,LongSummaryStatistics> departmentSalary=	 Department.populateDepartments().stream().collect(Collectors.toMap(Department::getName, dep->dep.getEmployees().stream()
 				.collect(Collectors.summarizingLong(Employee::getSalary))
 				));
-	
 	departmentSalary.forEach((dept, stats) ->
     System.out.println(dept + " → Min: " + stats.getMin() + ", Max: " + stats.getMax()));;
 	}
@@ -85,8 +84,6 @@ public class Day6 {
 		problem3();
 		System.out.println("-------------------");
 		problem4();
-		System.out.println("-------------------");
-		problem5();
 	}
 
 }
