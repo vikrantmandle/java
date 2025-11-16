@@ -1,0 +1,73 @@
+package com.app.basic.streams.revision;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.app.basic.streams.data.Department;
+import com.app.basic.streams.data.Product;
+import com.app.java.streams.prep.Employee;
+
+public class Day7 {
+
+	static void problem1() {
+		List<Department>departmentData=Department.populateDepartments();
+		
+		Map<String, Map<String, List<String>>>result=	departmentData.stream().collect(Collectors.toMap(Department::getName,
+				n->n.getEmployees().stream().collect(Collectors.groupingBy(emp->{
+					if (emp.getSalary() < 50000)
+	                    return "LOW";
+	                else if (emp.getSalary() < 100000)
+	                    return "MID";
+	                else
+	                    return "HIGH";
+				},Collectors.mapping(Employee::getName, Collectors.toList())))
+				));
+		
+		result.forEach((dept, rangeMap) -> {
+		    System.out.println(dept + ":");
+		    rangeMap.forEach((range, names) ->
+		        System.out.println("  " + range + " -> " + names));
+		});
+	}
+	
+	static void problem2() {
+		List<String> sentences = List.of(
+			    "java streams are powerful",
+			    "practice makes mastery",
+			    "interviewers test your thinking"
+			);
+		
+		String longestWord=		sentences.stream().flatMap(n->Arrays.stream(n.split(" ") ) ).sorted(Comparator.comparingInt(String::length).reversed()).findFirst().orElse(null);
+		System.out.println("Longest word =>"+longestWord);
+		
+		//approach 2 :=>
+		Optional<String> longWord =	sentences.stream().flatMap(n->Arrays.stream(n.split(" "))).max(Comparator.comparingInt(String::length));
+		longWord.ifPresent(System.out::println);
+	}
+	
+	//Top 2 Most Expensive Products
+	static void problem3() {
+		List<Product> productData= Product.populateProducts();
+		
+		Map<String,List<Product>> sortedProductData=productData.stream()
+				.collect(Collectors.groupingBy(Product::getCategory,
+						Collectors.collectingAndThen(Collectors.toList(), n->n.stream().sorted(Comparator.comparingDouble(Product::getPrice).reversed()).limit(2).toList())
+						));
+		
+		sortedProductData.forEach((a,b)->   System.out.println(a + ":" + b));
+	}
+	
+	public static void main(String[] args) {
+			problem1();
+			System.out.println("----------------");
+			problem2();
+			System.out.println("----------------");
+			problem3();
+
+	}
+
+}

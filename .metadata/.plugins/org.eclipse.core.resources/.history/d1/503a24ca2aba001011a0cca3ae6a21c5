@@ -1,9 +1,0 @@
-package com.app.basic.streams.revision;
-
-public class Day1 {
-	
-	public static void main(String [] args) {
-		
-	}
-
-}

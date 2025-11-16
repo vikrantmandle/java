@@ -1,0 +1,17 @@
+package com.app.basic.streams.revision;
+
+import java.util.List;
+
+import com.app.basic.streams.data.Department;
+
+public class Day7 {
+
+	static void problem1() {
+		List<Department>departmentData=Department.populateDepartments();
+	}
+	public static void main(String[] args) {
+		
+
+	}
+
+}
